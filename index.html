@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrimeTracer Chennai - Civic Crime Reporting Portal</title>
+    <meta name="description" content="Fast, transparent crime reporting and policing for Chennai - powered by AI & AWS technology">
+    <meta name="author" content="CrimeTracer Chennai">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Government Portal Theme - Professional Navy & Clean Whites */
+            --background: hsl(244, 13%, 97%);
+            --foreground: hsl(220, 33%, 15%);
+            --card: hsl(0, 0%, 100%);
+            --card-foreground: hsl(220, 33%, 15%);
+            --primary: hsl(217, 91%, 24%);
+            --primary-foreground: hsl(0, 0%, 100%);
+            --primary-light: hsl(217, 91%, 35%);
+            --secondary: hsl(217, 32%, 17%);
+            --secondary-foreground: hsl(0, 0%, 100%);
+            --muted: hsl(244, 13%, 95%);
+            --muted-foreground: hsl(220, 14%, 46%);
+            --accent: hsl(217, 32%, 17%);
+            --accent-foreground: hsl(0, 0%, 100%);
+            --status-high: hsl(0, 84%, 60%);
+            --status-medium: hsl(45, 93%, 47%);
+            --status-low: hsl(142, 76%, 36%);
+            --status-closed: hsl(220, 14%, 46%);
+            --border: hsl(220, 13%, 91%);
+            --input: hsl(220, 13%, 91%);
+            --ring: hsl(217, 91%, 24%);
+            --radius: 0.5rem;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-foreground);
+        }
+
+        .language-toggle {
+            display: flex;
+            background-color: var(--primary-light);
+            border-radius: var(--radius);
+            padding: 0.25rem;
+        }
+
+        .language-btn {
+            padding: 0.5rem 0.75rem;
+            border: none;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .language-btn.active {
+            background-color: var(--primary-foreground);
+            color: var(--primary);
+        }
+
+        .language-btn:not(.active) {
+            background-color: transparent;
+            color: var(--primary-foreground);
+        }
+
+        .language-btn:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary)),
+                        linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640"><rect fill="%23f3f4f6" width="1920" height="640"/><polygon fill="%231e3a8a" opacity="0.1" points="0,640 960,320 1920,640"/><polygon fill="%23dbeafe" opacity="0.3" points="0,0 960,160 1920,0 1920,640 0,640"/></svg>');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--primary-foreground);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.125rem;
+        }
+
+        /* Portal Cards Section */
+        .portal-section {
+            padding: 4rem 0;
+            background-color: rgba(244, 244, 245, 0.3);
+        }
+
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 4xl;
+            margin: 0 auto;
+        }
+
+        .portal-card {
+            background-color: var(--card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .portal-card:hover {
+            border-color: rgba(30, 58, 138, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .portal-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem;
+            padding: 1rem;
+            background-color: rgba(30, 58, 138, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .portal-description {
+            color: var(--muted-foreground);
+            margin-bottom: 1.5rem;
+        }
+
+        .portal-btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .portal-btn.primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .portal-btn.primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .portal-btn.secondary {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+
+        .portal-btn.secondary:hover {
+            background-color: rgba(55, 65, 81, 0.9);
+        }
+
+        /* Form Sections */
+        .form-section {
+            padding: 4rem 0;
+            background-color: var(--background);
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .form-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-description {
+            color: var(--muted-foreground);
+        }
+
+        .form-content {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-grid.two-col {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--foreground);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            padding: 0.75rem;
+            border: 1px solid var(--input);
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            background-color: var(--card);
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--ring);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--muted);
+        }
+
+        /* Confirmation Card */
+        .confirmation-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card);
+            border: 1px solid hsl(142, 76%, 36%);
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .confirmation-header {
+            padding: 2rem;
+            text-align: center;
+            background-color: hsl(142, 76%, 96%);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .confirmation-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: hsl(142, 76%, 36%);
+            margin-top: 1rem;
+        }
+
+        .confirmation-details {
+            padding: 1.5rem;
+            background-color: var(--card);
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .badge-high { background-color: var(--status-high); color: white; }
+        .badge-medium { background-color: var(--status-medium); color: white; }
+        .badge-low { background-color: var(--status-low); color: white; }
+        .badge-secondary { background-color: var(--muted); color: var(--muted-foreground); }
+
+        /* Dashboard Table */
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .dashboard-table th,
+        .dashboard-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-table th {
+            font-weight: 600;
+            color: var(--muted-foreground);
+            background-color: var(--muted);
+        }
+
+        .dashboard-table tbody tr:hover {
+            background-color: var(--muted);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            padding: 3rem 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-foreground);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-grid.two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Icons using Unicode symbols */
+        .icon-shield::before { content: "🛡️"; }
+        .icon-users::before { content: "👥"; }
+        .icon-file::before { content: "📄"; }
+        .icon-map::before { content: "📍"; }
+        .icon-upload::before { content: "📤"; }
+        .icon-check::before { content: "✅"; }
+        .icon-clock::before { content: "🕐"; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-logo">
+                <span class="icon-shield" style="font-size: 2rem;"></span>
+                <h1 class="header-title" id="headerTitle">CrimeTracer Chennai</h1>
+            </div>
+            <div class="language-toggle">
+                <button class="language-btn active" onclick="setLanguage('en')" id="btnEn">EN</button>
+                <button class="language-btn" onclick="setLanguage('ta')" id="btnTa">தமிழ்</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h2 class="hero-title" id="heroTagline">Fast, transparent crime reporting and policing — powered by AI & AWS</h2>
+            <div class="hero-location">
+                <span class="icon-map"></span>
+                <span>Chennai, Tamil Nadu</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portal Cards Section -->
+    <section class="portal-section">
+        <div class="portal-container">
+            <div class="portal-grid">
+                <!-- Victim Portal Card -->
+                <div class="portal-card" onclick="toggleSection('victim')">
+                    <div class="portal-icon">
+                        <span class="icon-users" style="font-size: 2rem;"></span>
+                    </div>
+                    <h3 class="portal-title" id="victimPortalTitle">For Citizens</h3>
+                    <p class="portal-description" id="victimPortalDesc">File a complaint, upload evidence, and track your case</p>
+                    <button class="portal-btn primary" id="fileComplaintBtn">File Complaint</button>
+                </div>
+
+                <!-- Cop Portal Card -->
+                <div class="portal-card" onclick="toggleSection('cop')">
+                    <div class="portal-icon">
+                        <span class="icon-shield" style="font-size: 2rem;"></span>
+                    </div>
+                    <h3 class="portal-title" id="copPortalTitle">For Police Officers</h3>
+                    <p class="portal-description" id="copPortalDesc">Access FIRs, update case statuses, and coordinate response</p>
+                    <button class="portal-btn secondary" id="officerLoginBtn">Officer Login</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Victim Complaint Form -->
+    <section id="victimSection" class="form-section">
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h3 class="form-title">
+                        <span class="icon-file"></span>
+                        File Crime Complaint
+                    </h3>
+                    <p class="form-description">Please provide accurate information to help us process your complaint quickly.</p>
+                </div>
+                <div class="form-content">
+                    <form id="victimForm">
+                        <div class="form-grid two-col">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="address">Address *</label>
+                            <textarea id="address" name="address" class="form-textarea" placeholder="Your complete address" required></textarea>
+                        </div>
+
+                        <div class="form-grid two-col">
+                            <div class="form-group">
+                                <label class="form-label" for="location">Crime Location *</label>
+                                <input type="text" id="location" name="location" class="form-input" placeholder="Where did the incident occur?" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="crimeType">Type of Crime *</label>
+                                <select id="crimeType" name="crimeType" class="form-select" required>
+                                    <option value="">Select crime type</option>
+                                    <option value="theft">Theft</option>
+                                    <option value="fraud">Fraud</option>
+                                    <option value="assault">Assault</option>
+                                    <option value="harassment">Harassment</option>
+                                    <option value="cybercrime">Cybercrime</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="description">Incident Description *</label>
+                            <textarea id="description" name="description" class="form-textarea" placeholder="Describe what happened in detail..." required style="min-height: 120px;"></textarea>
+                        </div>
+
+                        <div class="form-grid two-col">
+                            <div class="form-group">
+                                <label class="form-label" for="evidence">Upload Evidence</label>
+                                <div class="upload-area" onclick="document.getElementById('evidence').click()">
+                                    <span class="icon-upload" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></span>
+                                    <p style="color: var(--muted-foreground); font-size: 0.875rem;">Click to upload images, videos, or documents</p>
+                                    <input type="file" id="evidence" name="evidence" multiple style="display: none;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="station">Preferred Police Station *</label>
+                                <select id="station" name="station" class="form-select" required>
+                                    <option value="">Select police station</option>
+                                    <option value="T. Nagar Police Station">T. Nagar Police Station</option>
+                                    <option value="Anna Nagar Police Station">Anna Nagar Police Station</option>
+                                    <option value="Adyar Police Station">Adyar Police Station</option>
+                                    <option value="Mylapore Police Station">Mylapore Police Station</option>
+                                    <option value="Velachery Police Station">Velachery Police Station</option>
+                                    <option value="Guindy Police Station">Guindy Police Station</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                            <button type="button" class="btn btn-outline" onclick="toggleSection('')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complaint Confirmation -->
+    <section id="confirmationSection" class="form-section">
+        <div class="form-container">
+            <div class="confirmation-card">
+                <div class="confirmation-header">
+                    <span class="icon-check" style="font-size: 4rem;"></span>
+                    <h3 class="confirmation-title">Complaint Filed Successfully</h3>
+                    <p style="color: hsl(142, 76%, 36%); margin-top: 0.5rem;">Your complaint has been registered and assigned to the appropriate station.</p>
+                </div>
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <span style="font-weight: 500;">FIR Number:</span>
+                        <span class="badge badge-secondary" id="firNumber">FIR001</span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="font-weight: 500;">IPC Sections:</span>
+                        <div>
+                            <span class="badge badge-medium">379 IPC</span>
+                            <span class="badge badge-medium">420 IPC</span>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <span style="font-weight: 500;">Severity:</span>
+                        <span class="badge badge-medium">MEDIUM</span>
+                    </div>
+                    <div class="detail-row">
+                        <span style="font-weight: 500;">Assigned Station:</span>
+                        <span style="font-size: 0.875rem;" id="assignedStation">T. Nagar Police Station</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="resetForms()">File Another Complaint</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Officer Login Form -->
+    <section id="copSection" class="form-section">
+        <div class="form-container">
+            <div class="form-card" style="max-width: 500px; margin: 0 auto;">
+                <div class="form-header">
+                    <h3 class="form-title">
+                        <span class="icon-shield"></span>
+                        Officer Login
+                    </h3>
+                    <p class="form-description">Enter your credentials to access the police dashboard.</p>
+                </div>
+                <div class="form-content">
+                    <form id="officerForm">
+                        <div class="form-group">
+                            <label class="form-label" for="officerId">Officer ID *</label>
+                            <input type="text" id="officerId" name="officerId" class="form-input" placeholder="Enter your officer ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="officerName">Officer Name *</label>
+                            <input type="text" id="officerName" name="officerName" class="form-input" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="officerEmail">Email *</label>
+                            <input type="email" id="officerEmail" name="officerEmail" class="form-input" placeholder="your.email@tnpolice.gov.in" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="officerStation">Police Station *</label>
+                            <select id="officerStation" name="officerStation" class="form-select" required>
+                                <option value="">Select your station</option>
+                                <option value="T. Nagar Police Station">T. Nagar Police Station</option>
+                                <option value="Anna Nagar Police Station">Anna Nagar Police Station</option>
+                                <option value="Adyar Police Station">Adyar Police Station</option>
+                                <option value="Mylapore Police Station">Mylapore Police Station</option>
+                                <option value="Velachery Police Station">Velachery Police Station</option>
+                                <option value="Guindy Police Station">Guindy Police Station</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="button" class="btn btn-outline" onclick="toggleSection('')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Officer Dashboard -->
+    <section id="dashboardSection" class="form-section">
+        <div class="form-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h2 style="font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">Police Dashboard</h2>
+                    <p style="color: var(--muted-foreground);" id="welcomeMessage">Welcome, Officer - Station</p>
+                </div>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+
+            <div class="form-card">
+                <div class="form-header">
+                    <h3 class="form-title">
+                        <span class="icon-file"></span>
+                        Active Complaints - <span id="dashboardStation">Station</span>
+                    </h3>
+                    <p class="form-description">Manage and update complaint statuses</p>
+                </div>
+                <div class="form-content">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>FIR ID</th>
+                                <th>Complainant</th>
+                                <th>Crime Type</th>
+                                <th>Location</th>
+                                <th>Severity</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="complaintsTable">
+                            <tr>
+                                <td style="font-weight: 600;">FIR001</td>
+                                <td>Rajesh Kumar</td>
+                                <td>Theft</td>
+                                <td>T. Nagar Main Road</td>
+                                <td><span class="badge badge-medium">MEDIUM</span></td>
+                                <td><span class="badge badge-medium">NEW</span></td>
+                                <td>2025-01-15 14:30</td>
+                                <td>
+                                    <select class="form-select" style="width: 140px;" onchange="updateStatus(this, 'FIR001')">
+                                        <option value="new">New</option>
+                                        <option value="investigating">Investigating</option>
+                                        <option value="closed">Closed</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;">FIR002</td>
+                                <td>Priya Sharma</td>
+                                <td>Fraud</td>
+                                <td>Anna Nagar West</td>
+                                <td><span class="badge badge-high">HIGH</span></td>
+                                <td><span class="badge" style="background-color: var(--primary); color: white;">INVESTIGATING</span></td>
+                                <td>2025-01-14 10:15</td>
+                                <td>
+                                    <select class="form-select" style="width: 140px;" onchange="updateStatus(this, 'FIR002')">
+                                        <option value="new">New</option>
+                                        <option value="investigating" selected>Investigating</option>
+                                        <option value="closed">Closed</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span class="icon-shield" style="font-size: 1.5rem;"></span>
+                        <span style="font-weight: 700; font-size: 1.125rem;" id="footerTitle">CrimeTracer Chennai</span>
+                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.875rem;">
+                        Making Chennai safer through technology and transparency.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">RTI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency</h4>
+                    <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.875rem;">
+                        <p>Police: <span style="font-weight: 700; color: white;">100</span></p>
+                        <p>Fire: <span style="font-weight: 700; color: white;">101</span></p>
+                        <p>Ambulance: <span style="font-weight: 700; color: white;">108</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 CrimeTracer Chennai Beta - Powered by AWS & AI Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global state management
+        let currentLanguage = 'en';
+        let activeSection = '';
+        let isLoggedIn = false;
+        let currentOfficer = null;
+
+        // Language translations
+        const translations = {
+            en: {
+                title: 'CrimeTracer Chennai',
+                tagline: 'Fast, transparent crime reporting and policing — powered by AI & AWS',
+                victimPortal: 'For Citizens',
+                victimSubtitle: 'File a complaint, upload evidence, and track your case',
+                copPortal: 'For Police Officers',
+                copSubtitle: 'Access FIRs, update case statuses, and coordinate response',
+                fileComplaint: 'File Complaint',
+                officerLogin: 'Officer Login'
+            },
+            ta: {
+                title: 'கிரைம்ட்ரேசர் சென்னை',
+                tagline: 'விரைவான, வெளிப்படையான குற்ற புகார் மற்றும் காவல்துறை — AI & AWS மூலம் இயக்கப்படுகிறது',
+                victimPortal: 'குடிமக்களுக்கான',
+                victimSubtitle: 'புகாரை பதிவு செய்யுங்கள், ஆதாரங்களை பதிவேற்றவும், உங்கள் வழக்கை கண்காணிக்கவும்',
+                copPortal: 'காவல் அதிகாரிகளுக்கான',
+                copSubtitle: 'FIR களை அணுகவும், வழக்கு நிலைகளை புதுப்பிக்கவும், பதிலை ஒருங்கிணைக்கவும்',
+                fileComplaint: 'புகார் பதிவு',
+                officerLogin: 'அதிகாரி உள்நுழைவு'
+            }
+        };
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update UI language
+            const t = translations[lang];
+            document.getElementById('headerTitle').textContent = t.title;
+            document.getElementById('heroTagline').textContent = t.tagline;
+            document.getElementById('victimPortalTitle').textContent = t.victimPortal;
+            document.getElementById('victimPortalDesc').textContent = t.victimSubtitle;
+            document.getElementById('copPortalTitle').textContent = t.copPortal;
+            document.getElementById('copPortalDesc').textContent = t.copSubtitle;
+            document.getElementById('fileComplaintBtn').textContent = t.fileComplaint;
+            document.getElementById('officerLoginBtn').textContent = t.officerLogin;
+            document.getElementById('footerTitle').textContent = t.title;
+            
+            // Update active button
+            document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+            document.getElementById('btnTa').classList.toggle('active', lang === 'ta');
+        }
+
+        // Section management
+        function toggleSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.form-section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            if (section && section !== activeSection) {
+                activeSection = section;
+                document.getElementById(section + 'Section').classList.add('active');
+                
+                // Smooth scroll to section
+                document.getElementById(section + 'Section').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                activeSection = '';
+            }
+        }
+
+        // Form handling
+        document.getElementById('victimForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const firNumber = 'FIR' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+            const station = formData.get('station');
+            
+            // Update confirmation details
+            document.getElementById('firNumber').textContent = firNumber;
+            document.getElementById('assignedStation').textContent = station;
+            
+            // Show confirmation
+            toggleSection('');
+            document.getElementById('confirmationSection').classList.add('active');
+            document.getElementById('confirmationSection').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        document.getElementById('officerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            currentOfficer = {
+                id: formData.get('officerId'),
+                name: formData.get('officerName'),
+                email: formData.get('officerEmail'),
+                station: formData.get('officerStation')
+            };
+            
+            isLoggedIn = true;
+            
+            // Update dashboard
+            document.getElementById('welcomeMessage').textContent = `Welcome, Officer ${currentOfficer.name} - ${currentOfficer.station}`;
+            document.getElementById('dashboardStation').textContent = currentOfficer.station;
+            
+            // Show dashboard
+            toggleSection('');
+            document.getElementById('dashboardSection').classList.add('active');
+            document.getElementById('dashboardSection').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Reset forms
+        function resetForms() {
+            document.getElementById('victimForm').reset();
+            document.getElementById('confirmationSection').classList.remove('active');
+            activeSection = '';
+        }
+
+        // Logout
+        function logout() {
+            isLoggedIn = false;
+            currentOfficer = null;
+            document.getElementById('officerForm').reset();
+            document.getElementById('dashboardSection').classList.remove('active');
+            activeSection = '';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Update status
+        function updateStatus(selectElement, firId) {
+            const newStatus = selectElement.value;
+            const row = selectElement.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(6)');
+            
+            // Update status badge
+            let statusBadge = '';
+            switch(newStatus) {
+                case 'new':
+                    statusBadge = '<span class="badge badge-medium">NEW</span>';
+                    break;
+                case 'investigating':
+                    statusBadge = '<span class="badge" style="background-color: var(--primary); color: white;">INVESTIGATING</span>';
+                    break;
+                case 'closed':
+                    statusBadge = '<span class="badge" style="background-color: var(--status-closed); color: white;">CLOSED</span>';
+                    break;
+            }
+            
+            statusCell.innerHTML = statusBadge;
+            
+            // Show success message (you could add a toast notification here)
+            console.log(`Updated ${firId} status to ${newStatus}`);
+        }
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // File upload handling
+        document.getElementById('evidence').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const uploadArea = e.target.closest('.upload-area');
+            
+            if (files.length > 0) {
+                const fileList = Array.from(files).map(file => file.name).join(', ');
+                uploadArea.innerHTML = `
+                    <span class="icon-check" style="font-size: 2rem; display: block; margin-bottom: 0.5rem; color: var(--status-low);"></span>
+                    <p style="color: var(--status-low); font-size: 0.875rem; font-weight: 500;">${files.length} file(s) selected</p>
+                    <p style="color: var(--muted-foreground); font-size: 0.75rem; margin-top: 0.25rem;">${fileList}</p>
+                `;
+            }
+        });
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default language
+            setLanguage('en');
+            
+            // Add any initialization code here
+            console.log('CrimeTracer Chennai Portal initialized');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+{
+  "bns_sections": [
+    {
+      "section": "BNS 101",
+      "category": "Theft",
+      "description": "Unlawful taking of movable property with intent to dishonestly remove it from possession",
+      "confidence": 0.85,
+      "precautions": [
+        "Secure personal belongings and avoid displaying valuables publicly",
+        "Report the incident immediately to local authorities with all available details",
+        "Keep important documents and identification in safe storage",
+        "Be aware of surroundings and avoid isolated areas when carrying valuables"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 115",
+      "category": "Assault",
+      "description": "Intentional use of criminal force against another person without consent",
+      "confidence": 0.90,
+      "precautions": [
+        "Seek immediate medical attention if any physical injuries are sustained",
+        "Document all injuries with photographs and medical reports",
+        "Avoid further confrontation with the perpetrator for personal safety",
+        "Consider informing trusted contacts about the incident for support"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 309",
+      "category": "Robbery",
+      "description": "Theft involving force, threat of force, or fear of immediate harm",
+      "confidence": 0.92,
+      "precautions": [
+        "Prioritize personal safety over property protection during incidents",
+        "Provide detailed descriptions of perpetrators to investigating officers",
+        "Review security measures for home or business premises",
+        "Consider counseling support if experiencing trauma from the incident"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 331",
+      "category": "House Breaking",
+      "description": "Unlawful entry into building with intent to commit an offense",
+      "confidence": 0.88,
+      "precautions": [
+        "Enhance physical security with improved locks and lighting systems",
+        "Install security cameras and alarm systems if feasible",
+        "Inform trusted neighbors about the incident for community awareness",
+        "Review and update home or property insurance coverage as needed"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 318",
+      "category": "Cheating",
+      "description": "Intentional deception to induce another to deliver property or consent",
+      "confidence": 0.80,
+      "precautions": [
+        "Monitor all financial accounts closely for unauthorized transactions",
+        "Report incidents to banks and relevant financial institutions immediately",
+        "Be cautious of unsolicited communications requesting personal information",
+        "Maintain records of all relevant documents and communications"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 351",
+      "category": "Criminal Intimidation",
+      "description": "Threatening another with injury to person, reputation or property",
+      "confidence": 0.87,
+      "precautions": [
+        "Document all threats received with dates, times, and methods of communication",
+        "Inform local authorities immediately about any threatening behavior",
+        "Consider seeking protective measures if threats appear credible",
+        "Avoid being alone in isolated locations until situation is resolved"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 79",
+      "category": "Hurt",
+      "description": "Causing bodily pain, disease or infirmity to another person",
+      "confidence": 0.85,
+      "precautions": [
+        "Obtain medical evaluation and treatment for all injuries sustained",
+        "Keep detailed medical records and photographs of injuries as evidence",
+        "Report the incident to authorities with complete factual information",
+        "Consider support services if experiencing ongoing effects from the incident"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 85",
+      "category": "Grievous Hurt",
+      "description": "Causing severe bodily injury including fractures, permanent disfigurement",
+      "confidence": 0.93,
+      "precautions": [
+        "Seek immediate emergency medical attention for serious injuries",
+        "Ensure comprehensive medical documentation of all injuries sustained",
+        "Contact authorities immediately to report the serious nature of the assault",
+        "Consider legal consultation regarding the severity of injuries sustained"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 296",
+      "category": "Dacoity",
+      "description": "Group robbery involving five or more persons acting together",
+      "confidence": 0.95,
+      "precautions": [
+        "Report group criminal activity to authorities with all available details",
+        "Provide descriptions of all perpetrators if safely possible to observe",
+        "Avoid areas known for group criminal activity until situation improves",
+        "Consider community safety measures and neighborhood watch programs"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 143",
+      "category": "Wrongful Restraint",
+      "description": "Voluntarily obstructing movement of another person from proceeding",
+      "confidence": 0.78,
+      "precautions": [
+        "Report any unlawful restraint or detention to authorities immediately",
+        "Seek safe locations and trusted contacts if feeling threatened",
+        "Document circumstances of restraint including time, location, and persons involved",
+        "Consider legal advice if restraint resulted in missed opportunities or losses"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 144",
+      "category": "Wrongful Confinement",
+      "description": "Unlawfully restraining person preventing movement beyond certain limits",
+      "confidence": 0.82,
+      "precautions": [
+        "Contact authorities immediately regarding unlawful confinement incidents",
+        "Seek medical attention if confinement caused physical or mental distress",
+        "Document all aspects of confinement including duration and conditions",
+        "Consider counseling services if experiencing lasting effects from incident"
+      ],
+      "ai_source": "human"
+    },
+    {
+      "section": "BNS 238",
+      "category": "Forgery",
+      "description": "Making false documents with intent to cause damage or injury",
+      "confidence": 0.75,
+      "precautions": [
+        "Report suspected document forgery to authorities with original documents",
+        "Monitor personal credit and official records for unauthorized changes",
+        "Secure important documents and verify authenticity of official communications",
+        "Consider legal advice if forged documents have caused financial losses"
+      ],
+      "ai_source": "human"
+    }
+  ],
+  "disclaimer": "These are paraphrased interpretations for informational purposes only. This is not legal advice. Consult qualified legal professionals for authoritative interpretation of legal statutes and their application to specific situations.",
+  "data_source": "Curated and paraphrased content following anti-plagiarism guidelines",
+  "last_updated": "2024-01-15",
+  "version": "1.0"
+}

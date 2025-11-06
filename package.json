@@ -1,0 +1,50 @@
+{
+  "name": "crime-tracer",
+  "version": "1.0.0",
+  "description": "Production-grade crime tracking system with AI-powered insights",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "dev:windows": ".\\start-dev.bat",
+    "dev:ps1": "powershell -ExecutionPolicy Bypass -File .\\start-dev.ps1",
+    "start": "concurrently \"npm run backend:start\" \"npm run frontend:build\"",
+    "backend:dev": "python main.py --host 0.0.0.0 --port 8000",
+    "backend:start": "python main.py --port 8000",
+    "backend:test": "python -c \"from main import app; print('Backend server can start successfully')\"",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:preview": "cd frontend && npm run preview",
+    "backend:install": "pip install -r requirements.txt",
+    "frontend:install": "cd frontend && npm install",
+    "install:all": "npm run backend:install && npm run frontend:install",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd Backend && python -m pytest",
+    "test:frontend": "cd frontend && npm run test",
+    "lint": "npm run lint:frontend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "type-check": "cd frontend && npm run type-check",
+    "seed:stations": "python main.py --seed-stations ./Datasets/officer_roster.csv",
+    "db:init": "python -c \"import asyncio; from Backend.db import init_db; asyncio.run(init_db())\"",
+    "clean": "rimraf Backend/__pycache__ Backend/**/__pycache__ frontend/dist frontend/node_modules/.cache",
+    "docker:build": "docker build -t crime-tracer .",
+    "docker:run": "docker run -p 8000:8000 -p 5173:5173 crime-tracer"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "rimraf": "^5.0.5"
+  },
+  "keywords": [
+    "crime-tracking",
+    "police-management",
+    "ai-powered",
+    "fastapi",
+    "react",
+    "typescript"
+  ],
+  "author": "CrimeTracer Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/crime-tracer.git"
+  }
+}
