@@ -88,7 +88,7 @@ python main.py --seed-stations /path/to/officer_roster_enriched.csv
 
 # Server runs on http://0.0.0.0:8000
 ```
-
+YOUTUBE LINK : https://www.youtube.com/watch?v=RVe4sQ6lcLE
 ### Frontend Setup
 
 1. **Initialize Frontend**
